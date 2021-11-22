@@ -1,0 +1,1 @@
+AES - Advanced Encryption Standard (также известный как Rijndael)

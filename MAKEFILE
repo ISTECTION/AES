@@ -1,0 +1,42 @@
+OPENSSL_INCLUDE := "D:\\Program Files\\OpenSSL-Win64-1.1.1\\include"
+OPENSSL_LIB     := "D:\\Program Files\\OpenSSL-Win64-1.1.1\\lib"
+
+LIBPNG          := "D:\\MEGA\\NSTU\\CODE\\Source\\LibPNG"
+PNG++           := "D:\\MEGA\\NSTU\\CODE\\Source\\png++-0.2.9"
+ZLIB            := "D:\\MEGA\\NSTU\\CODE\\Source\\ZLib"
+
+PNG_LIB         := "D:\\MEGA\\NSTU\\CODE\\Lib"
+
+SRC     := src
+INCLUDE := include
+OUTPUT  := output
+CXX     := g++
+RM      := del /q /f
+
+CXX_FLAGS         := -std=c++17
+CXX_RELEASE_FLAGS := -O2
+
+main: clean compile running
+main_release: clean compile_release
+
+running:
+	$(OUTPUT)/main.exe file/input.txt
+
+compile:
+	$(CXX) $(CXX_FLAGS) $(SRC)/main.cpp include/PKCS7/pkcs7_padding.cpp include/AES/aes.c -o $(OUTPUT)/main.exe -I$(INCLUDE) -I$(OPENSSL_INCLUDE) -L$(OPENSSL_LIB) -lcrypto -lssl
+
+compile_release:
+	$(CXX) $(CXX_FLAGS) $(CXX_RELEASE_FLAGS) $(SRC)/main.cpp include/PKCS7/pkcs7_padding.cpp include/AES/aes.c -o $(OUTPUT)/main.exe -I$(INCLUDE) -I$(OPENSSL_INCLUDE) -L$(OPENSSL_LIB) -lcrypto -lssl
+
+
+
+main_image: clean compile_main_image
+	$(OUTPUT)/main_image.exe image/KV-1.png
+
+compile_main_image:
+	$(CXX) $(CXX_FLAGS) $(SRC)/main_image.cpp -o $(OUTPUT)/main_image.exe -I$(INCLUDE) -I$(PNG++) -L$(PNG_LIB) -lpng -lz
+
+
+
+clean:
+	$(RM) $(OUTPUT)\*.exe
