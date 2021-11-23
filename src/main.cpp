@@ -1,4 +1,5 @@
 #include "PKCS7/pkcs7_padding.h"
+#include "Base64/base64.hpp"
 #include "algorithm.hpp"
 #include "utilites.hpp"
 #include "output.hpp"
@@ -8,7 +9,6 @@
 #include <iostream>
 #include <fstream>
 #include <vector>
-
 
 
 int main(int argc, char* argv[]) {
@@ -32,14 +32,14 @@ int main(int argc, char* argv[]) {
 
     switch (hash)
     {
-    case '1':
-        key = sha256(password);
-        break;
-    case '2':
-        key = md5(password);
-        break;
-    default:
-        throw std::runtime_error("Incorrect input");
+        case '1':
+            key = sha256(password);
+            break;
+        case '2':
+            key = md5(password);
+            break;
+        default:
+            throw std::runtime_error("Incorrect input");
     }
 
     size_t size = text.size();

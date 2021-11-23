@@ -34,9 +34,13 @@ main_image: clean compile_main_image
 	$(OUTPUT)/main_image.exe image/KV-1.png
 
 compile_main_image:
-	$(CXX) $(CXX_FLAGS) $(SRC)/main_image.cpp -o $(OUTPUT)/main_image.exe -I$(INCLUDE) -I$(PNG++) -L$(PNG_LIB) -lpng -lz
+	$(CXX) $(CXX_FLAGS) $(SRC)/main_image.cpp include/PKCS7/pkcs7_padding.cpp include/AES/aes.c -o $(OUTPUT)/main_image.exe -I$(INCLUDE) -I$(PNG++) -L$(PNG_LIB) -I$(OPENSSL_INCLUDE) -L$(OPENSSL_LIB) -lcrypto -lssl -lpng -lz
 
 
+converter: clean compile_converter
+
+compile_converter:
+	$(CXX) $(CXX_FLAGS) $(SRC)/converter/converter.cpp -o $(OUTPUT)/converter.exe -I$(INCLUDE) -I$(PNG++) -L$(PNG_LIB) -lpng -lz
 
 clean:
 	$(RM) $(OUTPUT)\*.exe

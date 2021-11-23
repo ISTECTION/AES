@@ -10,6 +10,7 @@
 #include <openssl/sha.h>
 #include <openssl/md5.h>
 #include <openssl/rand.h>
+#include <openssl/hmac.h>
 
 std::vector<uint8_t> sha256(const std::string &str) {
     std::vector<uint8_t> hash(SHA256_DIGEST_LENGTH);
@@ -39,6 +40,25 @@ std::vector<uint8_t> md5(const std::string &str) {
     //             << std::setfill('0')
     //             << static_cast<int>(hash[i]);
     return hash;
+}
+
+std::vector<uint8_t> calcHMAC_SHA256(std::vector<uint8_t> key,
+                                     std::vector<uint8_t> &data) {
+
+    std::vector<uint8_t> hmac(SHA256_DIGEST_LENGTH);
+    unsigned int hmac_len;
+
+    HMAC (
+        EVP_sha256(),
+        &key[0],
+        static_cast<int>(key.size()),
+        reinterpret_cast<unsigned char const*>(&data[0]),
+        static_cast<int>(data.size()),
+        &hmac[0],
+        &hmac_len
+    );
+
+    return hmac;
 }
 
 std::vector<uint8_t> generateIV() {
