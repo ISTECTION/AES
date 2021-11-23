@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <cstdlib>
 #include <vector>
 #include <string>
 
@@ -29,6 +30,17 @@ std::string enterPassword() {
     }
     std::cout << std::endl;
     return password;
+}
+
+std::vector<uint8_t> enterIV() {
+    std::vector<uint8_t> IV(16);
+    std::string str_iv;
+    str_iv.resize(32);
+    std::cin.getline(&str_iv[0], str_iv.size() + 1);
+
+    for (size_t pos = 0; pos < 16; pos++)
+        IV[pos] = strtol(str_iv.substr(pos * 2, 2).c_str(), nullptr, 16);
+    return IV;
 }
 
 std::vector<uint8_t> toVector(const std::string &str) {

@@ -16,7 +16,7 @@
 #endif
 
 #ifndef ECB
-  #define ECB 0
+  #define ECB 1
 #endif
 
 #ifndef CTR
