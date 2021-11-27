@@ -1,1 +1,1 @@
-As it was noted by Sarah, the function pkcs7_padding_data_length has a small bug for the cases where the report string is exactly N times the 16 bytes. This is fixed by changed the in line 41 of the file pkcs7_padding.c the returned value to be the buffer_size. Please do note that this is a valid solution given that we will provide as a report string printable characters which will always be higher in value than 16 which is our modulo. You can find the updated file here.
+Hello world!

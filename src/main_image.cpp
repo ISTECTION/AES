@@ -13,6 +13,7 @@
 #include <array>
 #include <map>
 
+#include <openssl/aes.h>
 #include <png++/image.hpp>
 #include <png++/rgba_pixel.hpp>
 
@@ -31,7 +32,6 @@ std::map<std::string, MODE> mode_m = {
     { "-ecb", MODE::ECB_MODE },
     { "-cbc", MODE::CBC_MODE }
 };
-
 
 int main(int argc, char* argv[]) {
 
@@ -66,10 +66,24 @@ int main(int argc, char* argv[]) {
             {
                 case MODE::ECB_MODE:
                 {
-                    AES_ECB_encrypt(&ctx, &pixels[0]);
-                    setIDAT_PNG(image, pixels);
+                    // AES_init_ctx(&ctx, &key[0]);
 
-                    image.write(path_info + "en-cbc.png");
+                    // AES_ECB_encrypt(&ctx, &pixels[0]);
+                    // setIDAT_PNG(image, pixels);
+
+                    // std::vector<uint8_t> HMAC = calcHMAC_SHA256(key, pixels);
+                    // writeFile(path_info + "HMAC.txt", HMAC);
+
+                    // image.write(path_info + "en-ecb.png");
+
+                    // AES_KEY enc_key, dec_key;
+                    // std::vector<uint8_t> out(pixels.size());
+
+                    // AES_set_encrypt_key(&key[0], key.size() * 8, &enc_key);
+                    // AES_ecb_encrypt(&pixels[0], &out[0],  &enc_key, AES_ENCRYPT);
+                    // setIDAT_PNG(image, pixels);
+
+                    // image.write(path_info + "en-ecb.png");
                     break;
                 }
                 case MODE::CBC_MODE:
@@ -81,8 +95,8 @@ int main(int argc, char* argv[]) {
                     AES_CBC_encrypt_buffer(&ctx, &pixels[0], pixels.size());
                     setIDAT_PNG(image, pixels);
 
-                    std::vector<uint8_t> hmac = calcHMAC_SHA256(key, pixels);
-                    writeFile(path_info + "HMAC.txt", IV);
+                    std::vector<uint8_t> HMAC = calcHMAC_SHA256(key, pixels);
+                    writeFile(path_info + "HMAC.txt", HMAC);
 
                     image.write(path_info + "en-cbc.png");
                     break;
