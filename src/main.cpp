@@ -43,10 +43,6 @@ int main(int argc, char* argv[]) {
             throw std::runtime_error("Incorrect input");
     }
 
-    for(size_t i = 0; i < 16; i++)
-        std::cout << std::dec << static_cast<char>(key[i]);
-    std::cout << std::endl;
-
     size_t size = text.size();
     {
         size_t nsize = {
@@ -62,13 +58,14 @@ int main(int argc, char* argv[]) {
 
     struct AES_ctx ctx;
     std::vector<uint8_t> IV = generateIV();
+    print(base64_encode(key));
+    print(base64_encode(IV));
+
 
     AES_init_ctx_iv(&ctx, &key[0], &IV[0]);
     AES_CBC_encrypt_buffer(&ctx, &text[0], text.size());
 
     print(base64_encode(text));
-
-
 
     AES_ctx_set_iv(&ctx, &IV[0]);
     AES_CBC_decrypt_buffer(&ctx, &text[0], text.size());

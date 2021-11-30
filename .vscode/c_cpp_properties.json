@@ -2,6 +2,8 @@
     "configurations": [
         {
             "name": "Win32",
+            "cppStandard": "c++17",
+            "compilerPath": "D:\\Program Files\\GCC\\11.2.0\\mingw32\\bin\\g++.exe",
             "includePath": [
                 "${workspaceFolder}\\include",
                 "D:\\Program Files\\OpenSSL-Win64-1.1.1\\include",
