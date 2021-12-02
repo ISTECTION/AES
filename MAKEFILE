@@ -1,11 +1,11 @@
-OPENSSL_INCLUDE := "D:\\Program Files\\OpenSSL-Win64-1.1.1\\include"
-OPENSSL_LIB     := "D:\\Program Files\\OpenSSL-Win64-1.1.1\\lib"
+OPENSSL_INCLUDE := "D:\\Qt6\\Tools\\mingw810_32\\opt\\include"
+OPENSSL_LIB     := "C:\\Program Files\\OpenSSL-Win32\\lib"
 
+ZLIB            := "D:\\MEGA\\NSTU\\CODE\\Source\\ZLib"
 LIBPNG          := "D:\\MEGA\\NSTU\\CODE\\Source\\LibPNG"
 PNG++           := "D:\\MEGA\\NSTU\\CODE\\Source\\png++-0.2.9"
-ZLIB            := "D:\\MEGA\\NSTU\\CODE\\Source\\ZLib"
 
-LIB             := "D:\\MEGA\\NSTU\\CODE\\Lib"
+LIB             := "D:\\MEGA\\NSTU\\CODE\\Lib\\x32"
 
 SRC     := src
 INCLUDE := include
@@ -16,7 +16,12 @@ RM      := del /q /f
 CXX_FLAGS         := -std=c++17
 CXX_RELEASE_FLAGS := -O2
 
-main: clean compile running
+
+SOURCE =  "D:\\MEGA\\NSTU\\CODE\\Source\\LibPNG\\pngrtran.c"
+SOURCE += "D:\\MEGA\\NSTU\\CODE\\Source\\LibPNG\\pngerror.c"
+SOURCE += "D:\\MEGA\\NSTU\\CODE\\Source\\LibPNG\\png.c"
+
+main: compile running
 main_release: clean compile_release
 
 running:
@@ -33,13 +38,13 @@ compile_release:
 main_image: clean compile_main_image
 
 compile_main_image:
-	$(CXX) $(CXX_FLAGS) $(SRC)/main_image.cpp include/PKCS7/pkcs7_padding.cpp include/AES/aes.c -o $(OUTPUT)/main_image.exe -I$(INCLUDE) -I$(PNG++) -I$(OPENSSL_INCLUDE) -L$(OPENSSL_LIB) -lcrypto -lssl -lpng -lz
+	$(CXX) $(CXX_FLAGS) $(SRC)/main_image.cpp $(SOURCE) include/PKCS7/pkcs7_padding.cpp include/AES/aes.c -o $(OUTPUT)/main_image.exe -L$(LIB) -L$(OPENSSL_LIB) -I$(INCLUDE) -I$(PNG++) -I$(ZLIB) -I$(LIBPNG) -I$(OPENSSL_INCLUDE) -lcrypto -lssl -lpng -lzlib
 
 
 converter: clean compile_converter
 
 compile_converter:
-	$(CXX) $(CXX_FLAGS) $(SRC)/converter/converter.cpp -o $(OUTPUT)/converter.exe -I$(INCLUDE) -I$(PNG++) -I$(LIBPNG) -L$(LIB) -lpng -lz
+	$(CXX) $(CXX_FLAGS) $(SRC)/converter/converter.cpp "D:\\MEGA\\NSTU\\CODE\\Source\\LibPNG\\pngrutil.c" $(SOURCE) -o $(OUTPUT)/converter.exe -I$(INCLUDE) -I$(PNG++) -I$(LIBPNG) -L$(LIB) -lpng -lz
 
 clean:
 	$(RM) $(OUTPUT)\*.exe

@@ -12,6 +12,7 @@
 #include <openssl/rand.h>
 #include <openssl/hmac.h>
 
+
 std::vector<uint8_t> sha256(const std::string &str) {
     std::vector<uint8_t> hash(SHA256_DIGEST_LENGTH);
     SHA256_CTX sha256;
@@ -62,11 +63,9 @@ std::vector<uint8_t> calcHMAC_SHA256(std::vector<uint8_t> key,
 }
 
 std::vector<uint8_t> generateIV() {
-    const unsigned int SIZE_BYTES = 16;
-
-    std::vector<uint8_t> init_vector;
-    init_vector.resize(SIZE_BYTES);
-    RAND_bytes(&init_vector[0], sizeof(init_vector));
+    std::vector<uint8_t> init_vector(16);
+    RAND_bytes(&init_vector[0], 16);
     return init_vector;
 }
+
 #endif // _ALGORITHM_HPP_

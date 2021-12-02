@@ -6,7 +6,7 @@
             "compilerPath": "D:\\Program Files\\GCC\\11.2.0\\mingw32\\bin\\g++.exe",
             "includePath": [
                 "${workspaceFolder}\\include",
-                "D:\\Program Files\\OpenSSL-Win64-1.1.1\\include",
+                "D:\\Qt6\\Tools\\mingw810_32\\opt\\include",
                 "D:\\MEGA\\NSTU\\CODE\\Source\\png++-0.2.9",
                 "D:\\MEGA\\NSTU\\CODE\\Source\\libPNG",
                 "D:\\MEGA\\NSTU\\CODE\\Source\\ZLib"

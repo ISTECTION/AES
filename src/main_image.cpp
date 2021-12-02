@@ -62,6 +62,7 @@ int main(int argc, char* argv[]) {
             std::string password = enterPassword();
             std::vector<uint8_t> key = sha256(password);
 
+
             switch (mode_m[mode])
             {
                 case MODE::ECB_MODE:
