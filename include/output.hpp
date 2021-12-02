@@ -7,7 +7,6 @@
 #include <iomanip>
 #include <fstream>
 #include <sstream>
-#include <cstring>
 #include <vector>
 
 
@@ -28,10 +27,10 @@ void printhex(const std::vector<uint8_t> &HEX, bool isUpper     = false,
     ENDLINE;
 }
 
-void print(const unsigned char* HEX) {
+void print(const std::vector<uint8_t> &HEX) {
 
-    for(size_t i = 0; i < std::strlen((char*)HEX); i++)
-        std::cout << std::dec << HEX[i];
+    for(size_t i = 0; i < HEX.size(); i++)
+        std::cout << std::dec << static_cast<char>(HEX[i]);
 
     ENDLINE;
 }

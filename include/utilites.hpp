@@ -11,12 +11,12 @@
 
 ///‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿ UTILITES ‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿︵‿ ///
 
-unsigned char* read(std::ifstream &fin) {
+std::vector<uint8_t> read(std::ifstream &fin) {
     std::string text, line;
     while (std::getline(fin, line))
         text += line;
 
-    unsigned char* T = new unsigned char[text.size()];
+    std::vector<uint8_t> T(text.size());
     for (size_t pos = 0; pos < text.size(); pos++)
         T[pos] = text[pos];
     return T;

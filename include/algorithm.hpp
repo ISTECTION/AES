@@ -7,10 +7,12 @@
 #include <vector>
 #include <string>
 
+
 #include <openssl/sha.h>
 #include <openssl/md5.h>
 #include <openssl/rand.h>
 #include <openssl/hmac.h>
+
 
 
 std::vector<uint8_t> sha256(const std::string &str) {
